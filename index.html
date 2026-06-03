@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>婚紗寫真 · Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f3ee;
+    --ink:#3a342d;
+    --muted:#8c8175;
+    --line:#d8cfc2;
+    --serif:"Cormorant Garamond","Noto Serif TC",serif;
+    --han:"Noto Serif TC",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:var(--han);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+
+  /* ---------- Cover ---------- */
+  .hero{
+    position:relative;height:100vh;min-height:560px;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;overflow:hidden;
+  }
+  .hero img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;filter:brightness(.72) saturate(.95);
+    transform:scale(1.05);animation:slowzoom 14s ease-out forwards;
+  }
+  @keyframes slowzoom{to{transform:scale(1)}}
+  .hero::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.35))}
+  .hero-inner{position:relative;z-index:2;color:#fff;padding:0 24px;
+    animation:fadeUp 1.6s ease both}
+  .hero .ey{font-family:var(--serif);letter-spacing:.5em;
+    text-transform:uppercase;font-size:.78rem;opacity:.85;margin-bottom:1.4rem;
+    padding-left:.5em}
+  .hero h1{font-family:var(--serif);font-weight:400;
+    font-size:clamp(3rem,9vw,6.5rem);line-height:1.05;letter-spacing:.02em}
+  .hero .amp{font-style:italic;display:block;font-size:.5em;margin:.25em 0;opacity:.9}
+  .hero .sub{margin-top:1.6rem;font-weight:300;letter-spacing:.35em;
+    font-size:.85rem;opacity:.9;padding-left:.35em}
+  .scroll{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+    z-index:2;color:#fff;opacity:.8;font-family:var(--serif);
+    letter-spacing:.3em;font-size:.7rem;animation:bob 2.4s ease-in-out infinite}
+  .scroll span{display:block;width:1px;height:42px;background:#fff;margin:10px auto 0;opacity:.6}
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+  /* ---------- Intro ---------- */
+  .intro{max-width:640px;margin:0 auto;padding:96px 28px 40px;text-align:center}
+  .intro .mark{font-family:var(--serif);font-size:2rem;color:var(--line)}
+  .intro p{color:var(--muted);font-weight:300;margin-top:1rem;
+    font-size:1.02rem;letter-spacing:.02em}
+
+  /* ---------- Gallery ---------- */
+  .gallery{column-count:3;column-gap:18px;
+    max-width:1200px;margin:0 auto;padding:24px 24px 80px}
+  .gallery figure{break-inside:avoid;margin:0 0 18px;position:relative;
+    overflow:hidden;border-radius:3px;cursor:zoom-in;
+    background:#e9e3da;box-shadow:0 6px 22px rgba(60,52,45,.08)}
+  .gallery img{display:block;width:100%;height:auto;
+    transition:transform .9s cubic-bezier(.2,.7,.2,1);
+    opacity:0;transform:translateY(18px);will-change:transform,opacity}
+  .gallery figure.in img{opacity:1;transform:none}
+  .gallery figure:hover img{transform:scale(1.04)}
+  @media(max-width:900px){.gallery{column-count:2;column-gap:14px}.gallery figure{margin-bottom:14px}}
+  @media(max-width:560px){.gallery{column-count:1}.intro{padding-top:64px}}
+
+  /* ---------- Footer ---------- */
+  footer{text-align:center;padding:56px 24px 80px;border-top:1px solid var(--line);
+    color:var(--muted)}
+  footer .h{font-family:var(--serif);font-size:2rem;color:var(--ink);letter-spacing:.04em}
+  footer .s{margin-top:.6rem;font-weight:300;letter-spacing:.3em;font-size:.78rem}
+
+  /* ---------- Lightbox ---------- */
+  .lb{position:fixed;inset:0;background:rgba(28,24,20,.94);
+    display:none;align-items:center;justify-content:center;z-index:50;
+    opacity:0;transition:opacity .3s}
+  .lb.open{display:flex;opacity:1}
+  .lb img{max-width:92vw;max-height:88vh;object-fit:contain;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);border-radius:2px;
+    animation:pop .35s ease}
+  @keyframes pop{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+  .lb .nav{position:absolute;top:0;bottom:0;width:38%;cursor:pointer;
+    display:flex;align-items:center;color:#fff;opacity:0;transition:opacity .25s;
+    font-family:var(--serif);font-size:2.4rem;user-select:none}
+  .lb .nav:hover{opacity:.85}
+  .lb .prev{left:0;justify-content:flex-start;padding-left:28px}
+  .lb .next{right:0;justify-content:flex-end;padding-right:28px}
+  .lb .close{position:absolute;top:20px;right:26px;color:#fff;font-size:2rem;
+    cursor:pointer;opacity:.7;font-family:var(--serif);line-height:1}
+  .lb .close:hover{opacity:1}
+  .lb .count{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+    color:#fff;opacity:.7;font-family:var(--serif);letter-spacing:.25em;font-size:.85rem}
+  @media(max-width:560px){.lb .nav{font-size:1.6rem;width:30%}}
+</style>
+</head>
+<body>
+
+  <header class="hero">
+    <img src="photos/01.jpg" alt="封面" fetchpriority="high">
+    <div class="hero-inner">
+      <div class="ey">Our Wedding Day</div>
+      <h1>奕婷<span class="amp">&amp;</span>幸福</h1>
+      <div class="sub">婚 紗 寫 真</div>
+    </div>
+    <div class="scroll">SCROLL<span></span></div>
+  </header>
+
+  <section class="intro">
+    <div class="mark">&#10086;</div>
+    <p>把最美的那一天，留成永遠。<br>謝謝你，陪我走進這段故事。</p>
+  </section>
+
+  <main class="gallery" id="gallery"></main>
+
+  <footer>
+    <div class="h">Thank You</div>
+    <div class="s">WITH LOVE</div>
+  </footer>
+
+  <div class="lb" id="lb">
+    <span class="close" id="lbClose">&times;</span>
+    <div class="nav prev" id="lbPrev">&#8249;</div>
+    <img id="lbImg" src="" alt="">
+    <div class="nav next" id="lbNext">&#8250;</div>
+    <div class="count" id="lbCount"></div>
+  </div>
+
+<script>
+  const N = 30;
+  const photos = Array.from({length:N},(_,i)=>`photos/${String(i+1).padStart(2,'0')}.jpg`);
+  const gallery = document.getElementById('gallery');
+
+  photos.forEach((src,i)=>{
+    const fig = document.createElement('figure');
+    const img = document.createElement('img');
+    img.loading = 'lazy';
+    img.src = src;
+    img.alt = `婚紗照 ${i+1}`;
+    img.dataset.idx = i;
+    fig.appendChild(img);
+    gallery.appendChild(fig);
+  });
+
+  // fade-in on scroll
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.08});
+  document.querySelectorAll('.gallery figure').forEach(f=>io.observe(f));
+
+  // lightbox
+  const lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'),
+        lbCount=document.getElementById('lbCount');
+  let cur=0;
+  function show(i){cur=(i+N)%N;lbImg.src=photos[cur];lbCount.textContent=`${cur+1} / ${N}`;}
+  function open(i){show(i);lb.classList.add('open');document.body.style.overflow='hidden';}
+  function close(){lb.classList.remove('open');document.body.style.overflow='';}
+  gallery.addEventListener('click',e=>{const t=e.target.closest('img');if(t)open(+t.dataset.idx);});
+  document.getElementById('lbClose').onclick=close;
+  document.getElementById('lbNext').onclick=e=>{e.stopPropagation();show(cur+1);};
+  document.getElementById('lbPrev').onclick=e=>{e.stopPropagation();show(cur-1);};
+  lb.addEventListener('click',e=>{if(e.target===lb)close();});
+  document.addEventListener('keydown',e=>{
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='ArrowRight')show(cur+1);
+    if(e.key==='ArrowLeft')show(cur-1);
+  });
+  // swipe on mobile
+  let sx=0;
+  lb.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+  lb.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;
+    if(Math.abs(dx)>50)show(cur+(dx<0?1:-1));},{passive:true});
+</script>
+</body>
+</html>
