@@ -6,7 +6,7 @@
 <title>婚紗寫真 · Wedding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+TC:wght@300;400;500&family=Ma+Shan+Zheng&family=Great+Vibes&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#f6f3ee;
@@ -15,6 +15,9 @@
     --line:#d8cfc2;
     --serif:"Cormorant Garamond","Noto Serif TC",serif;
     --han:"Noto Serif TC",serif;
+    --script:"Great Vibes","Ma Shan Zheng",cursive;
+    --dance:"Dancing Script","Ma Shan Zheng",cursive;
+    --hand:"Ma Shan Zheng","Noto Serif TC",cursive;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -41,14 +44,14 @@
     background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.35))}
   .hero-inner{position:relative;z-index:2;color:#fff;padding:0 24px;
     animation:fadeUp 1.6s ease both}
-  .hero .ey{font-family:var(--serif);letter-spacing:.5em;
-    text-transform:uppercase;font-size:.78rem;opacity:.85;margin-bottom:1.4rem;
-    padding-left:.5em}
-  .hero h1{font-family:var(--serif);font-weight:400;
-    font-size:clamp(3rem,9vw,6.5rem);line-height:1.05;letter-spacing:.02em}
-  .hero .amp{font-style:italic;display:block;font-size:.5em;margin:.25em 0;opacity:.9}
-  .hero .sub{margin-top:1.6rem;font-weight:300;letter-spacing:.35em;
-    font-size:.85rem;opacity:.9;padding-left:.35em}
+  .hero .ey{font-family:var(--dance);letter-spacing:.06em;
+    font-size:1.5rem;opacity:.9;margin-bottom:.8rem}
+  .hero h1{font-family:var(--script);font-weight:400;
+    font-size:clamp(3.4rem,11vw,7.8rem);line-height:1.1;letter-spacing:.03em}
+  .hero .amp{display:block;font-size:.62em;margin:.05em 0;opacity:.92;
+    font-family:var(--script)}
+  .hero .sub{font-family:var(--hand);margin-top:1.3rem;
+    font-size:1.5rem;letter-spacing:.32em;opacity:.92;padding-left:.32em}
   .scroll{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
     z-index:2;color:#fff;opacity:.8;font-family:var(--serif);
     letter-spacing:.3em;font-size:.7rem;animation:bob 2.4s ease-in-out infinite}
@@ -59,8 +62,8 @@
   /* ---------- Intro ---------- */
   .intro{max-width:640px;margin:0 auto;padding:96px 28px 40px;text-align:center}
   .intro .mark{font-family:var(--serif);font-size:2rem;color:var(--line)}
-  .intro p{color:var(--muted);font-weight:300;margin-top:1rem;
-    font-size:1.02rem;letter-spacing:.02em}
+  .intro p{font-family:var(--hand);color:#6f6557;margin-top:1rem;
+    font-size:1.45rem;line-height:1.9;letter-spacing:.04em}
 
   /* ---------- Gallery ---------- */
   .gallery{column-count:3;column-gap:18px;
@@ -79,8 +82,8 @@
   /* ---------- Footer ---------- */
   footer{text-align:center;padding:56px 24px 80px;border-top:1px solid var(--line);
     color:var(--muted)}
-  footer .h{font-family:var(--serif);font-size:2rem;color:var(--ink);letter-spacing:.04em}
-  footer .s{margin-top:.6rem;font-weight:300;letter-spacing:.3em;font-size:.78rem}
+  footer .h{font-family:var(--script);font-size:3.4rem;color:var(--ink);letter-spacing:.02em;line-height:1}
+  footer .s{font-family:var(--dance);margin-top:.4rem;letter-spacing:.08em;font-size:1.15rem}
 
   /* ---------- Lightbox ---------- */
   .lb{position:fixed;inset:0;background:rgba(28,24,20,.94);
@@ -111,7 +114,7 @@
     <img src="photos/01.jpg" alt="封面" fetchpriority="high">
     <div class="hero-inner">
       <div class="ey">Our Wedding Day</div>
-      <h1>奕婷<span class="amp">&amp;</span>幸福</h1>
+      <h1>奕婷<span class="amp">&amp;</span>耘陞</h1>
       <div class="sub">婚 紗 寫 真</div>
     </div>
     <div class="scroll">SCROLL<span></span></div>
